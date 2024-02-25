@@ -1,4 +1,3 @@
-import 'package:clash_meta_flutter/apis/apis.dart';
 import 'package:clash_meta_flutter/models/proxies.dart';
 import 'package:clash_meta_flutter/pages/home.dart';
 import 'package:flutter/material.dart';
@@ -6,11 +5,11 @@ import 'package:provider/provider.dart';
 
 void main() => runApp(MultiProvider(
       providers: [
-        FutureProvider(
-          initialData: Proxies(),
-          create: (ctx) async {
-            final a = await getProxies();
-            return Proxies.fromJson(a);
+        ChangeNotifierProvider(
+          create: (ctx) {
+            final p = Proxies();
+            p.futureGenerate();
+            return p;
           },
         ),
         ChangeNotifierProvider(
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
       initialRoute: "/",
       theme: ThemeData(
           brightness: Brightness.dark,
-          primaryColor: Colors.black,
+          primaryColorDark: Colors.grey,
           iconTheme: const IconThemeData(color: Colors.grey)),
     );
   }

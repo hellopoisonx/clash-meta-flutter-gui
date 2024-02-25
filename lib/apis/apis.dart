@@ -61,3 +61,17 @@ Future<Map<String, dynamic>> getGroupDelay(String target) async {
     throw ApiExceptions(err: e.toString());
   }
 }
+
+Future<bool> changeProxyForSelector(String selector, String target) async {
+  try {
+    final resp =
+        await _dio.put("/proxies/$selector", data: "{\"name\":\"$target\"}");
+    if (resp.statusCode == 204) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (e) {
+    throw ApiExceptions(err: e.toString());
+  }
+}

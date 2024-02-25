@@ -1,24 +1,56 @@
-import 'package:flutter/material.dart';
+import 'package:clash_meta_flutter/apis/apis.dart';
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'proxies.g.dart';
 
 class Delays extends ChangeNotifier {
   Map<String, int> delays = {};
+  bool first = true;
   void updateDelays(Map<String, int> value) {
     delays.addAll(value);
+    if (kDebugMode) {
+      print(delays);
+    }
     notifyListeners();
+  }
+
+  void futureGenerate(List<String> nodes) async {
+    // List<Future<Map<String, dynamic>>> tasks = [];
+    for (var node in nodes) {
+      // tasks.add(Future(() => getGroupDelay(selector)));
+      try {
+        final delay = await getSingleNodeDelay(node);
+        updateDelays(delay);
+      } catch (e) {
+        continue;
+      }
+    }
+    // final delays = await Future.wait(tasks);
+    // for (var delay in delays) {
+    //   updateDelays(Map<String, int>.from(delay));
+    // }
   }
 }
 
 @JsonSerializable()
-class Proxies {
+class Proxies extends ChangeNotifier {
   @JsonKey(name: "proxies")
   Map<String, ProxyItem> proxyList = {};
 
   Proxies();
   factory Proxies.fromJson(Map<String, dynamic> json) =>
       _$ProxiesFromJson(json);
+
+  void futureGenerate() async {
+    proxyList = Proxies.fromJson(await getProxies()).proxyList;
+    notifyListeners();
+  }
+
+  void updateSelectorNowNode(String selector, String node) {
+    proxyList[selector]?.now = node;
+    notifyListeners();
+  }
 
   Map<String, dynamic> toJson() => _$ProxiesToJson(this);
 }
@@ -40,7 +72,7 @@ class ProxyItem {
   @JsonKey(name: "all")
   final List<String>? all;
   @JsonKey(name: "now")
-  final String? now;
+  String? now;
   @JsonKey(name: "hidden")
   final bool? hidden;
   @JsonKey(name: "icon")
