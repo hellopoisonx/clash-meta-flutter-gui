@@ -1,4 +1,7 @@
+import 'package:clash_meta_flutter/apis/apis.dart';
+import 'package:clash_meta_flutter/models/logs.dart';
 import 'package:clash_meta_flutter/models/proxies.dart';
+import 'package:clash_meta_flutter/models/traffic.dart';
 import 'package:clash_meta_flutter/pages/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +17,13 @@ void main() => runApp(MultiProvider(
         ),
         ChangeNotifierProvider(
           create: (ctx) => Delays(),
-        )
+        ),
+        ChangeNotifierProvider(create: (ctx) => Logs()),
+        ChangeNotifierProvider(create: (ctx) {
+          final t = Traffic();
+          getTraffic(t);
+          return t;
+        })
       ],
       child: const MyApp(),
     ));

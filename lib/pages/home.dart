@@ -1,6 +1,11 @@
+import 'package:clash_meta_flutter/models/traffic.dart';
+import 'package:clash_meta_flutter/pages/connections.dart';
 import 'package:clash_meta_flutter/pages/groups.dart';
+import 'package:clash_meta_flutter/pages/logs.dart';
 import 'package:clash_meta_flutter/widgets/side_nav_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,6 +22,8 @@ class _HomePageState extends State<HomePage> {
     _pages = [
       const Home(),
       const GroupsPage(),
+      const LogsPage(),
+      const ConnectionsPage(),
     ];
     super.initState();
   }
@@ -27,12 +34,32 @@ class _HomePageState extends State<HomePage> {
       body: SafeArea(
           child: Row(
         children: [
-          SizedBox(
+          Container(
+            color: Colors.black,
             width: 120,
-            child: SideNavBar(actions: [
-              {"Home": () => setState(() => _idx = 0)},
-              {"Groups": () => setState(() => _idx = 1)}
-            ], activeItem: "Home", extraItem: const Text("...")),
+            child: SideNavBar(
+              actions: [
+                {"Home": () => setState(() => _idx = 0)},
+                {"Groups": () => setState(() => _idx = 1)},
+                {"Logs": () => setState(() => _idx = 2)},
+                {"Connections": () => setState(() => _idx = 3)},
+              ],
+              activeItem: "Home",
+              extraItem: Column(
+                children: [
+                  Consumer<Traffic>(
+                    builder: (_, t, __) {
+                      return Text("Up:   ${t.up}");
+                    },
+                  ),
+                  Consumer<Traffic>(
+                    builder: (_, t, __) {
+                      return Text("Down: ${t.down}");
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
           Expanded(
             child: _pages[_idx],

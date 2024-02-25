@@ -1,11 +1,14 @@
+import 'package:flutter/foundation.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'logs.g.dart';
 
-class Logs {
-  List<LogItem> logList = [];
-  prepend(Map<String, dynamic> json) =>
-      logList.insert(0, LogItem.fromJson(json));
+class Logs extends ChangeNotifier {
+  List<Set<dynamic>> logList = [];
+  updateLogList(Map<String, dynamic> json) {
+    logList.insert(0, {LogItem.fromJson(json), DateTime.now().toString()});
+    notifyListeners();
+  }
 }
 
 @JsonSerializable()
