@@ -39,6 +39,9 @@ class Proxies extends ChangeNotifier {
   Map<String, ProxyItem> proxyList = {};
 
   Proxies();
+
+  int get nodeAmount => proxyList["GLOBAL"]?.all?.length ?? 0;
+
   factory Proxies.fromJson(Map<String, dynamic> json) =>
       _$ProxiesFromJson(json);
 

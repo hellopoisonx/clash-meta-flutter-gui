@@ -1,6 +1,18 @@
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'connections.g.dart';
+
+class ConnectionController extends ChangeNotifier {
+  Connections? conn;
+  ConnectionController();
+  void update(Connections n) {
+    conn = n;
+    notifyListeners();
+  }
+
+  int get activeConnectionAmount => conn?.connections.length ?? 0;
+}
 
 @JsonSerializable()
 class Connections {
@@ -8,13 +20,11 @@ class Connections {
   final int uploadTotal;
   final List<Connection> connections;
   final int memory;
-
   Connections(
       {required this.downloadTotal,
       required this.uploadTotal,
       required this.connections,
       required this.memory});
-
   factory Connections.fromJson(Map<String, dynamic> json) =>
       _$ConnectionsFromJson(json);
   Map<String, dynamic> toJson() => _$ConnectionsToJson(this);

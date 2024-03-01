@@ -20,7 +20,7 @@ class GroupsPage extends StatelessWidget {
             .map((selector) => Container(
                   margin: const EdgeInsets.all(10),
                   decoration: const BoxDecoration(
-                      color: Color.fromARGB(200, 40, 40, 40),
+                      // color: Color.fromARGB(199, 227, 222, 222),
                       borderRadius: BorderRadius.all(Radius.circular(25))),
                   child: ExpansionTile(
                       title: Text(selector.name),
@@ -54,9 +54,9 @@ class GroupsPage extends StatelessWidget {
                                       color: node ==
                                               p.proxyList[selector.name]?.now!
                                           ? const Color.fromARGB(
-                                              80, 33, 33, 200)
+                                              107, 187, 187, 190)
                                           : const Color.fromARGB(
-                                              150, 46, 26, 5),
+                                              98, 244, 241, 241),
                                       borderRadius: const BorderRadius.all(
                                           Radius.circular(25))),
                                   margin: const EdgeInsets.all(5),

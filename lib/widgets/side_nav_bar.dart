@@ -19,9 +19,6 @@ class _SideNavBarState extends State<SideNavBar> {
   @override
   void initState() {
     _activeItem = widget.activeItem;
-    // for (int i = 0; i < actions.length - 1; i++) {
-    //   actions.insert(i, const SizedBox(height: 15));
-    // }
     super.initState();
   }
 
@@ -29,17 +26,23 @@ class _SideNavBarState extends State<SideNavBar> {
   Widget build(BuildContext context) {
     actions = widget.actions
         .map((m) => InkWell(
+              borderRadius: const BorderRadius.all(Radius.circular(10)),
               onTap: () {
                 m[m.keys.first]!();
                 setState(() => _activeItem = m.keys.first);
               },
-              child: Text(
-                m.keys.first,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: m.keys.first == _activeItem
-                      ? Colors.blueGrey
-                      : Colors.grey,
+              child: Container(
+                alignment: Alignment.center,
+                height: 35,
+                width: 150,
+                margin: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    color: _activeItem == m.keys.first
+                        ? const Color.fromARGB(255, 255, 255, 255)
+                        : const Color.fromARGB(87, 255, 255, 255),
+                    borderRadius: const BorderRadius.all(Radius.circular(10))),
+                child: Text(
+                  m.keys.first,
                 ),
               ),
             ))
@@ -50,7 +53,6 @@ class _SideNavBarState extends State<SideNavBar> {
         const Spacer(),
         Center(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
             children: actions,
           ),
         ),
