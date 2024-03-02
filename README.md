@@ -1,16 +1,7 @@
-# clash_meta_flutter
+# REMEMBER THE CRIME COMMITTED BY THE JAPANESE IMPERIAL ARMY
 
-A new Flutter project.
+[The official website of THE EXHIBITION OF EVIDENCES OF CRIME COMMITTED BY UNIT 731 OF THE JAPANESE IMPERIAL ARMY](http://www.731museum.org.cn/)
 
-## Getting Started
+!["Bodies of Chinese massacred by Japanese troops outside Nanjing"]("https://www.19371213.com.cn/collection/zdwwjs/202212/W020221211355740156714.jpg")
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+!["Beneath the dark city walls are the bodies slaughtered by the Japanese army. Japanese soldiers, armed with rifles and bayonets and Japanese military flags, stood next to the bodies of Chinese men showing off their so-called "Wuwei"."]("https://www.19371213.com.cn/collection/zdwwjs/202212/W020221211355740154077.png")
